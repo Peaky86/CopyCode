@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* This will apply to all paragraphs in the document */
+        p {
+            font-family: Arial;
+            color: green;
+        }
+        #codeArea {
+            font-family: Arial;
+            color: white;
+        }
+        #copyButton {
+            font-family: Arial;
+            background-color: black;
+            color: white;
+        }
+        body {
+            background-color: #5A5A5A;
+        }
+    </style>
+    <title>Copy Code Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+</head>
+<body>
+  <pre id="codeArea">const express = require('express');
+const axios = require('axios');
+const cors = require('cors');
+
+const app = express();
+const PORT = 3000;
+
+app.use(cors());  // Enable CORS for all routes
+
+app.get('/movie-details', async (req, res) => {
+    const options = {
+        method: 'GET',
+        url: 'https://movies-tv-shows-database.p.rapidapi.com/',
+        params: {
+            movieid: req.query.movieid || 'tt1375666'
+        },
+        headers: {
+            Type: 'get-movie-details',
+            'X-RapidAPI-Key': 'YOUR_API_KEY_HERE',
+            'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await axios.request(options);
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
+});
+</pre>
+  <button id="copyButton" data-clipboard-target="#codeArea">📋 Copy Code</button>
+
+  <script>
+    new ClipboardJS('#copyButton');
+  </script>
+</body>
+</html>

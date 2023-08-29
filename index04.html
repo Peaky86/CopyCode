@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* This will apply to all paragraphs in the document */
+        p {
+            font-family: Arial;
+            color: green;
+        }
+        #codeArea {
+            font-family: Arial;
+            color: white;
+        }
+        #copyButton {
+            font-family: Arial;
+            background-color: black;
+            color: white;
+        }
+        body {
+            background-color: #5A5A5A;
+        }
+    </style>
+    <title>Copy Code Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+</head>
+<body>
+  <pre id="codeArea">http://localhost:3000/movie-details</pre>
+  <button id="copyButton" data-clipboard-target="#codeArea">📋 Copy Code</button>
+
+  <script>
+    new ClipboardJS('#copyButton');
+  </script>
+</body>
+</html>
