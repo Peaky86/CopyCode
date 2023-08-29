@@ -25,23 +25,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 </head>
 <body>
-  <pre id="codeArea">const express = require('express');
+  <pre id="codeArea">// Imports the Express library, which is used to set up the web server.
+const express = require('express');
+
+// Imports the Axios library, a popular HTTP client to make requests to external APIs.
 const axios = require('axios');
+
+// Imports the CORS (Cross-Origin Resource Sharing) library, which allows 
+// AJAX requests to skip the Same-origin policy and access resources 
+// from remote hosts.
 const cors = require('cors');
 
+// Initializes the Express application.
 const app = express();
+
+// Defines the port number where the server will listen.
 const PORT = 3000;
 
-app.use(cors());  // Enable CORS for all routes
+// Uses the CORS middleware to enable CORS for all incoming requests.
+app.use(cors());
 
+// Defines an asynchronous route handler for the '/movie-details' endpoint.
 app.get('/movie-details', async (req, res) => {
+    // Defines the configuration options for the API request using Axios.
     const options = {
-        method: 'GET',
-        url: 'https://movies-tv-shows-database.p.rapidapi.com/',
+        method: 'GET',  // Specifies the HTTP method.
+        url: 'https://movies-tv-shows-database.p.rapidapi.com/',  // The URL for the API.
         params: {
+            // Gets the 'movieid' from the request query parameters. If not provided, defaults to 'tt1375666'.
             movieid: req.query.movieid || 'tt1375666'
         },
-        headers: {
+        headers: {  // The required headers for the API request.
             Type: 'get-movie-details',
             'X-RapidAPI-Key': 'YOUR_API_KEY_HERE',
             'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com'
@@ -49,16 +63,21 @@ app.get('/movie-details', async (req, res) => {
     };
 
     try {
+        // Makes the API request using the defined options.
         const response = await axios.request(options);
+        // Sends back the data received from the API as a JSON response.
         res.json(response.data);
     } catch (error) {
+        // If there's an error in the API request, sends a 500 (Internal Server Error) status and the error message.
         res.status(500).send(error.toString());
     }
 });
 
+// Starts the server on the defined port and logs a message to the console.
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
 });
+
 </pre>
   <button id="copyButton" data-clipboard-target="#codeArea">📋 Copy Code</button>
 
