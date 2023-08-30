@@ -52,12 +52,12 @@ app.get('/movie-details', async (req, res) => {
         method: 'GET',  // Specifies the HTTP method.
         url: 'https://movies-tv-shows-database.p.rapidapi.com/',  // The URL for the API.
         params: {
-            // Gets the 'movieid' from the request query parameters. If not provided, defaults to 'tt1375666'.
-            movieid: req.query.movieid || 'tt1375666'
+            // Gets the 'title' from the request query parameters. If not provided, defaults to 'Harry Potter'.
+            title: req.query.title || 'Harry Potter'
         },
         headers: {  // The required headers for the API request.
-            Type: 'get-movie-details',
-            'X-RapidAPI-Key': 'YOUR_API_KEY_HERE',
+            Type: 'get-movies-by-title',
+            'X-RapidAPI-Key': 'cd0f112d40msh93e9445708f83aap19e781jsn13e739480b21',
             'X-RapidAPI-Host': 'movies-tv-shows-database.p.rapidapi.com'
         }
     };
