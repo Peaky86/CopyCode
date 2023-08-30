@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* This will apply to all paragraphs in the document */
+        p {
+            font-family: Arial;
+            color: green;
+        }
+        #codeArea {
+            font-family: Arial;
+            color: white;
+        }
+        #copyButton {
+            font-family: Arial;
+            background-color: black;
+            color: white;
+        }
+        body {
+            background-color: #5A5A5A;
+        }
+    </style>
+    <title>Copy Code Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+</head>
+<body>
+  <pre id="codeArea">Sub FetchMovieDetails()
+    Dim xhr As Object
+    Dim movieId As String
+    Dim url As String
+    Dim json As String
+    
+    ' Initialize XMLHttpRequest object
+    Set xhr = CreateObject("MSXML2.ServerXMLHTTP.6.0")
+    
+    ' Read selected movie ID from cell B3
+    title = Sheets("Dashboard").Range("B3").Value
+    
+    ' Construct the API URL
+    url = "http://localhost:3000/movie-details?title=" & title
+    
+    ' Make a GET request to the API
+    xhr.Open "GET", url, False
+    xhr.send
+    
+    ' Get the response JSON as a string
+    json = xhr.responseText
+    
+    ' TODO: Parse and display the JSON in Excel cells
+    ' For example purposes, we just display it in a message box
+    MsgBox json
+    
+End Sub
+</pre>
+  <button id="copyButton" data-clipboard-target="#codeArea">📋 Copy Code</button>
+
+  <script>
+    new ClipboardJS('#copyButton');
+  </script>
+</body>
+</html>
